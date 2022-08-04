@@ -35,7 +35,7 @@ function AddUser() {
 
     return (
         <div>
-            <button onClick={openModal}>Open Modal</button>
+            <button onClick={openModal}>Add User</button>
             <Modal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}
@@ -43,15 +43,12 @@ function AddUser() {
                 style={customStyles}
                 contentLabel="Example Modal"
             >
-                <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
+                <h4 className=''>User Information</h4>
                 <button onClick={closeModal}>close</button>
-                <div>I am a modal</div>
                 <form>
                     <input />
                     <button>tab navigation</button>
                     <button>stays</button>
-                    <button>inside</button>
-                    <button>the modal</button>
                 </form>
             </Modal>
         </div>

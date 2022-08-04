@@ -43,7 +43,7 @@ function App() {
         </thead>
         <tbody>
           {
-            users.map(user => <UserTable user={user}></UserTable>)
+            users.map(user => <UserTable key={user.id} user={user}></UserTable>)
           }
         </tbody>
       </Table>

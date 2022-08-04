@@ -1,4 +1,5 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 
 import Modal from 'react-modal';
 
@@ -26,15 +27,18 @@ function AddUser() {
 
     function afterOpenModal() {
         // references are now sync'd and can be accessed.
-        subtitle.style.color = '#f00';
+        // subtitle.style.color = '#f00';
     }
 
     function closeModal() {
         setIsOpen(false);
     }
 
+    const { register, handleSubmit } = useForm();
+    const onSubmit = data => console.log(data);
+
     return (
-        <div>
+        <div style={{ width: "500px" }}>
             <button onClick={openModal}>Add User</button>
             <Modal
                 isOpen={modalIsOpen}
@@ -43,13 +47,23 @@ function AddUser() {
                 style={customStyles}
                 contentLabel="Example Modal"
             >
-                <h4 className=''>User Information</h4>
-                <button onClick={closeModal}>close</button>
-                <form>
-                    <input />
-                    <button>tab navigation</button>
-                    <button>stays</button>
+                <h4 className='mb-4 text-center'>User Information</h4>
+
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <input className='' {...register("name", { required: true, maxLength: 20 })} />
+                    <br />
+                    <input {...register("username", { required: true, maxLength: 20 })} />
+                    <br />
+                    <input {...register("email", { pattern: /^[A-Za-z]+$/i })} />
+                    <br />
+                    <input type="number" {...register("phone", { min: 18, max: 99 })} />
+                    <br />
+                    <input {...register("website", { required: true, maxLength: 20 })} />
+                    <br />
+                    <input type="submit" />
                 </form>
+
+                <button onClick={closeModal} className="mt-3">close</button>
             </Modal>
         </div>
     );

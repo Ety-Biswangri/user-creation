@@ -13,11 +13,13 @@ function UserTable({ user }) {
             <td>{username}</td>
             <td>{email}</td>
             <td>{phone}</td>
-            <td>{website}</td>
+            <td>
+                <p><span><a target={`_blank`} href={`https://${website}`}>{website}</a></span> </p>
+            </td >
             <td>
                 <DeleteModal></DeleteModal>
             </td>
-        </tr>
+        </tr >
     );
 }
 

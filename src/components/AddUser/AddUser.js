@@ -60,7 +60,7 @@ function AddUser({ users, isReload, setIsReload }) {
     // const onSubmit = data => console.log(data);
 
     return (
-        <div style={{ width: "500px" }}>
+        <div>
             <Button onClick={openModal} variant="primary" className='mt-5 mb-5'>Add User</Button>
             <Modal
                 isOpen={modalIsOpen}
@@ -71,37 +71,35 @@ function AddUser({ users, isReload, setIsReload }) {
             >
                 <h4 className='mb-4 text-center'>User Information</h4>
 
-                <Button onClick={closeModal} variant="warning" size='sm'>Close</Button>
-
                 <Form onSubmit={handleSave}>
-                    <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Group className="mb-2" controlId="formBasicName">
                         <Form.Label>Name</Form.Label>
-                        <Form.Control type="text" name='name' placeholder="Enter name" />
+                        <Form.Control size='sm' type="text" name='name' placeholder="Enter name" required />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicUsername">
+                    <Form.Group className="mb-2" controlId="formBasicUsername">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control type="text" name='username' placeholder="Enter username" />
+                        <Form.Control size='sm' type="text" name='username' placeholder="Enter username" required />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-2" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" name='email' placeholder="Enter email" />
+                        <Form.Control size='sm' type="email" name='email' placeholder="Enter email" required />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicPhone">
+                    <Form.Group className="mb-2" controlId="formBasicPhone">
                         <Form.Label>Phone</Form.Label>
-                        <Form.Control type="number" name='phone' placeholder="Enter phone number" />
+                        <Form.Control size='sm' type="number" name='phone' placeholder="Enter phone number" required />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicWebsite">
                         <Form.Label>Website</Form.Label>
-                        <Form.Control type="url" name='website' placeholder="Enter website" />
+                        <Form.Control size='sm' type="url" name='website' placeholder="Enter website" required />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit">
-                        Save
-                    </Button>
+                    <Button variant="primary" type="submit">Save</Button>
+
+                    <Button onClick={closeModal} variant="warning" className='ms-4'>Close</Button>
                 </Form>
             </Modal>
         </div>

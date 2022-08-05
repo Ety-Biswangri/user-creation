@@ -49,7 +49,7 @@ function DeleteModal() {
                     <h4>Do you want to delete this user?</h4>
                 </div>
                 <div className='mt-4'>
-                    <Button onClick={closeModal} variant="danger">Yes</Button>
+                    <Button variant="danger">Yes</Button>
                     <Button onClick={closeModal} variant="warning" className='ms-4'>No</Button>
                 </div>
             </Modal>

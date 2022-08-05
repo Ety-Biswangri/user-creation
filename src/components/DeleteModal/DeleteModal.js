@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-
+import { toast } from 'react-toastify';
 import Modal from 'react-modal';
 
 const customStyles = {
@@ -34,6 +34,10 @@ function DeleteModal() {
         setIsOpen(false);
     }
 
+    const userDeleted = () => {
+        toast(" User deleted successfully");
+    }
+
     return (
         <div>
             <Button onClick={openModal} variant="danger" size='sm'>Delete</Button>
@@ -49,7 +53,7 @@ function DeleteModal() {
                     <h4>Do you want to delete this user?</h4>
                 </div>
                 <div className='mt-4'>
-                    <Button variant="danger">Yes</Button>
+                    <Button variant="danger" onClick={userDeleted}>Yes</Button>
                     <Button onClick={closeModal} variant="warning" className='ms-4'>No</Button>
                 </div>
             </Modal>

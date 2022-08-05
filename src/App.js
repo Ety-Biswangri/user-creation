@@ -7,6 +7,8 @@ import AddUser from './components/AddUser/AddUser';
 import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -48,6 +50,8 @@ function App() {
           </tbody>
         </Table>
       </div>
+
+      <ToastContainer />
 
     </div>
   );

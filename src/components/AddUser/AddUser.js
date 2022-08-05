@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
+import { toast } from 'react-toastify';
 import Modal from 'react-modal';
 
 const customStyles = {
@@ -38,6 +38,8 @@ function AddUser({ users, isReload, setIsReload }) {
 
     const handleSave = (event) => {
         event.preventDefault();
+        toast("User is added successfully");
+        event.target.reset()
 
         const name = event.target.name.value;
         const username = event.target.username.value;
@@ -53,7 +55,9 @@ function AddUser({ users, isReload, setIsReload }) {
             body: JSON.stringify({ name, username, email, phone, website })
         })
             .then(res => res.json())
-            .then(data => setIsReload(!isReload));
+            .then(data => {
+                setIsReload(!isReload);
+            });
     }
 
     // const { register, handleSubmit } = useForm();

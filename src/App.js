@@ -24,29 +24,31 @@ function App() {
     <div>
       <Header></Header>
 
-      <div>
-        <AddUser></AddUser>
+      <div className='container'>
+        <AddUser isReload={isReload} setIsReload={setIsReload}></AddUser>
       </div>
 
-      <Table responsive>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Website</th>
-            <th>Action</th>
+      <div className='container'>
+        <Table responsive>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Website</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              users.map(user => <UserTable key={user.id} user={user}></UserTable>)
+            }
+          </tbody>
+        </Table>
+      </div>
 
-          </tr>
-        </thead>
-        <tbody>
-          {
-            users.map(user => <UserTable key={user.id} user={user}></UserTable>)
-          }
-        </tbody>
-      </Table>
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 import Modal from 'react-modal';
 
@@ -17,7 +19,7 @@ const customStyles = {
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root');
 
-function AddUser() {
+function AddUser({ users, isReload, setIsReload }) {
     let subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
 
@@ -34,12 +36,32 @@ function AddUser() {
         setIsOpen(false);
     }
 
-    const { register, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const handleSave = (event) => {
+        event.preventDefault();
+
+        const name = event.target.name.value;
+        const username = event.target.username.value;
+        const email = event.target.email.value;
+        const phone = event.target.phone.value;
+        const website = event.target.url.value;
+
+        fetch(`https://jsonplaceholder.typicode.com/users`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, username, email, phone, website })
+        })
+            .then(res => res.json())
+            .then(data => setIsReload(!isReload));
+    }
+
+    // const { register, handleSubmit } = useForm();
+    // const onSubmit = data => console.log(data);
 
     return (
         <div style={{ width: "500px" }}>
-            <button onClick={openModal}>Add User</button>
+            <Button onClick={openModal} variant="primary" className='mt-5 mb-5'>Add User</Button>
             <Modal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}
@@ -49,21 +71,38 @@ function AddUser() {
             >
                 <h4 className='mb-4 text-center'>User Information</h4>
 
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <input className='' {...register("name", { required: true, maxLength: 20 })} />
-                    <br />
-                    <input {...register("username", { required: true, maxLength: 20 })} />
-                    <br />
-                    <input {...register("email", { pattern: /^[A-Za-z]+$/i })} />
-                    <br />
-                    <input type="number" {...register("phone", { min: 18, max: 99 })} />
-                    <br />
-                    <input {...register("website", { required: true, maxLength: 20 })} />
-                    <br />
-                    <input type="submit" />
-                </form>
+                <Button onClick={closeModal} variant="warning" size='sm'>Close</Button>
 
-                <button onClick={closeModal} className="mt-3">close</button>
+                <Form onSubmit={handleSave}>
+                    <Form.Group className="mb-3" controlId="formBasicName">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control type="text" name='name' placeholder="Enter name" />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formBasicUsername">
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control type="text" name='username' placeholder="Enter username" />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control type="email" name='email' placeholder="Enter email" />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formBasicPhone">
+                        <Form.Label>Phone</Form.Label>
+                        <Form.Control type="number" name='phone' placeholder="Enter phone number" />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formBasicWebsite">
+                        <Form.Label>Website</Form.Label>
+                        <Form.Control type="url" name='website' placeholder="Enter website" />
+                    </Form.Group>
+
+                    <Button variant="primary" type="submit">
+                        Save
+                    </Button>
+                </Form>
             </Modal>
         </div>
     );

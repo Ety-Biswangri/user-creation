@@ -1,4 +1,6 @@
+import { Button } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
+import DeleteModal from '../DeleteModal/DeleteModal';
 
 function UserTable({ user }) {
 
@@ -13,7 +15,7 @@ function UserTable({ user }) {
             <td>{phone}</td>
             <td>{website}</td>
             <td>
-                <button>Delete</button>
+                <DeleteModal></DeleteModal>
             </td>
         </tr>
     );
